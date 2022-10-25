@@ -1,0 +1,13 @@
+{"_default": {"1": 
+
+					{"player_id": 1, "first_name": "oumar", "last_name": "camara", "date_of_birth": "22/01/2022", "gender": "H", "rank": 5, "tournament_score": 3}, 
+					
+			  "2": {"player_id": 2, "first_name": "oumar", "last_name": "camara", "date_of_birth": "22/01/2022", "gender": "H", "rank": 8, "tournament_score": 3}, 
+			  
+			  
+			  "3": {"player_id": 3, "first_name": "SYLLA", "last_name": "Oumou", "date_of_birth": "22/01/2023", "gender": "F", "rank": 11, "tournament_score": 8}, 
+			  
+			  "4": {"player_id": 4, "first_name": "BAN", "last_name": "SYY", "date_of_birth": "22/01/1982", "gender": "F", "rank": 15, "tournament_score": 6}, 
+			  "5": {"player_id": 5, "first_name": "bountou", "last_name": "bang", "date_of_birth": "22/04/2012", "gender": "H", "rank": 18, "tournament_score": 5}, 
+			  
+			  "6": {"player_id": 6, "first_name": "GARA", "last_name": "ty", "date_of_birth": "22/05/1254", "gender": "H", "rank": 20, "tournament_score": 9}, "7": {"player_id": 7, "first_name": "Barry", "last_name": "Bobo", "date_of_birth": "22/05/2027", "gender": "H", "rank": 22, "tournament_score": 4},  "8": {"player_id": 8, "first_name": "Barry", "last_name": "Bobo", "date_of_birth": "22/05/2027", "gender": "H", "rank": 25, "tournament_score": 3}}}
