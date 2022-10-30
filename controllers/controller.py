@@ -5,6 +5,7 @@ from itertools import combinations
 from numpy import array_split
 import numpy as np
 
+
 class PlayerController:
 
     def __init__(self):
@@ -44,61 +45,42 @@ class PlayerController:
 
     def control_tournament(self):
         """Creer le premier tour et mettre à jour le score des joueurs"""
-
+        tour_ids_in_match =[]
         tournament = Tournament()
         first_list_tour = tournament.generate_first_pairs_players()
-        #print(first_list_tour)
-
+        print(first_list_tour)
         first_tour = Tour(first_list_tour)
         first_tour_score = first_tour.mettre_jour_score()
-        players_ids_in_match = Match.te
+        tour_ids_in_match.append(Match.list_match_finiched)
+        print(tour_ids_in_match)
+        Match.list_match_finiched = []
 
-        player = Player()
-        all_players = player.load_player_db()
-        all_possible_matches = [match for match in combinations(all_players, 2)]
-
-        all_ids_players = []
-        for i in range(len(all_players)):
-            all_ids_players.append(all_players[i]["player_id"])
-        all_ids_combinations = [player_ids for player_ids in combinations(all_ids_players, 2)]
-        
-
-        old = all_ids_combinations
-        new = players_ids_in_match
-
+        for i in range(2, tournament.number_of_tours + 1):
+            print( "Roud" + str(i) + ": ---- The Others Round in Tourny  ---- ")
+            others_list_tour = tournament.generate_others_pairs_players()
+            other_tour = Tour(others_list_tour)
+            others_tour_score = other_tour.mettre_jour_score()
+            others_players_ids_in_match = Match.list_match_finiched
+            tour_ids_in_match.append(others_players_ids_in_match)
+            print(tour_ids_in_match)
+            Match.list_match_finiched = []
+        tournament.list_of_tours = tour_ids_in_match
+        print(tournament.list_of_tours)
 
 
 """test """
+
+
+
+
 control = PlayerController()
 control.control_tournament()
 
 
-"""
-my_list_ids = [(a, b) for (a, b) in all_ids_combinations for (c, d) in players_ids_in_match if (a == c) and (b == d) or (a == d) and (b == c)]
-
-list_a_rejouer = []
-for i in all_ids_combinations:
-    if not i in my_list_ids:
-        list_a_rejouer.append(i)
-print("Match : ", list_a_rejouer)
-"""
-"""
-    else:
-      list_a_rejouer.append(i)
-    print("Mismatch : ", list_a_rejouer)
-    """
-"""
 
 
-#round = list(zip(np.array(even_index), np.array(odd_index)))
-#print(round)
 
 
-#others_possible_matches = set(all_possible_matches) - set(first_list_tour)
-#print(all_possible_matches)
-#print(first_list_tour)
-
-"""
 
 
 

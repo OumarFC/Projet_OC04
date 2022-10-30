@@ -127,3 +127,11 @@ class Player:
             players.append(item)
 
         return players
+
+    def update_player_db(self):
+
+        db = self.data_players
+        test = db.get(doc_id=3)
+        test2 = db.update({'tournament_score': 20}, doc_ids=[self.player_id])
+
+
