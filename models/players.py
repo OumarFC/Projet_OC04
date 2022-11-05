@@ -35,6 +35,23 @@ class Player:
             "tournament_score": self.tournament_score
         }
 
+    def unserialized_player(self, serialized_player):
+        player_id = serialized_player["player_id"]
+        first_name = serialized_player["first_name"]
+        last_name = serialized_player["last_name"]
+        date_of_birth = serialized_player["date_of_birth"]
+        gender = serialized_player["gender"]
+        rank = serialized_player["rank"]
+        tournament_score = serialized_player["tournament_score"]
+        return Player(player_id,
+                      first_name,
+                      last_name,
+                      date_of_birth,
+                      gender,
+                      rank,
+                      tournament_score,
+                      )
+
     def save_player_db(self):
         """add new player to database and Set player id to doc id """
         players_db = self.data_players
@@ -127,11 +144,5 @@ class Player:
             players.append(item)
 
         return players
-
-    def update_player_db(self):
-
-        db = self.data_players
-        test = db.get(doc_id=3)
-        test2 = db.update({'tournament_score': 20}, doc_ids=[self.player_id])
 
 
