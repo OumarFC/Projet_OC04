@@ -2,7 +2,12 @@
 from models.players import Player
 from numpy import array
 from tinydb import TinyDB
-chmin_data = 'C:/Users/Itec Global Services/PycharmProjects/Projet_OC04/data/'
+import os
+import sys
+
+sys.path.append(os.getcwd())
+data_path = f'{os.getcwd()}\data\\'
+
 
 class Tournament:
 
@@ -26,7 +31,7 @@ class Tournament:
         self.players = players
         self.list_of_tours = []
         self.tournament_id = tournament_id
-        self.data_tournament = TinyDB(chmin_data + 'tournament.json')
+        self.data_tournament = TinyDB(data_path + 'tournament.json')
 
     def __str__(self):
             return f"Liste des matchs : {self.list_of_tours})."
@@ -182,21 +187,12 @@ class Tournament:
 
 class Tour:
 
-    """
-    Chaque tour est une liste de matchs. Chaque match consiste en une paire de joueurs
-    avec un champ de résultats pour chaque joueur. Lorsqu'un tour est terminé,
-    le gestionnaire du tournoi saisit les résultats de chaque match avant de
-    générer les paires suivantes.
-    Les instances de tour doivent être stockées dans une liste sur l'instance
-    de tournoi à laquelle elles appartiennent.
-
-    doit Renvoyer l'instance de tour """
-
-    def __init__(self, name=None, begin_time=None, end_time=None, list_of_match=[]):
+    def __init__(self, name=None, begin_time=None, end_time=None, list_match_finiched=None):
         self.name = name
         self.begin_time = begin_time
         self.end_time = end_time
-        self.list_of_match = list_of_match
+        self.list_match_finiched = list_match_finiched
+        self.list_of_match = []
 
     def serialize_tour(self):
         """Return serialized info for round """
@@ -204,23 +200,23 @@ class Tour:
             "name": self.name,
             "begin_time": self.begin_time,
             "end_time": self.end_time,
-            "list_of_match": self.list_of_match
+            "list_match_finiched" : self.list_match_finiched,
         }
 
     def unserialized_tour(self, serialized_tour):
         name = serialized_tour["name"],
         begin_time = serialized_tour["begin_time"],
         end_time = serialized_tour["end_time"]
-        list_of_match = serialized_tour["list_of_match"]
+        list_of_match = serialized_tour["list_match_finiched"]
         return Tour(name,
                 begin_time,
                 end_time,
-                list_of_match
+                list_match_finiched,
                 )
 
-    def mettre_jour_score(self):
+    def mettre_jour_score(self, list_of_match):
 
-        for match in self.list_of_match:
+        for match in list_of_match:
             """ faire un match et mettre le score des joueurs qui s'affronte"""
             winner = int(input(" -->"))
 
@@ -243,7 +239,7 @@ class Match:
     def __init__(self, players=None):
         """un tuple de deux joueurs"""
         self.players = players
-        self.t = ()
+        self.duel_match = ()
 
     def __str__(self):
         return f"MATCH (Joueur : {self.players[0].player_id}) --CONTRE-- Joueur : {self.players[1].player_id}."
@@ -254,16 +250,16 @@ class Match:
 
             self.players[0].tournament_score += 1/2
             self.players[1].tournament_score += 1/2
-            self.t = [(self.players[1].player_id, self.players[1].tournament_score),
+            self.duel_match = [(self.players[1].player_id, self.players[1].tournament_score),
                       (self.players[0].player_id, self.players[0].tournament_score)]
 
         elif vainqueur == 0 or vainqueur == 1:
 
             self.players[vainqueur].tournament_score += 1
-            self.t = [(self.players[1].player_id, self.players[1].tournament_score),
+            self.duel_match = [(self.players[1].player_id, self.players[1].tournament_score),
                       (self.players[0].player_id, self.players[0].tournament_score)]
 
-        Match.list_match_finiched.append(self.t)
+        Match.list_match_finiched.append(self.duel_match)
 
 
 

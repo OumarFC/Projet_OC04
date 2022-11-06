@@ -81,32 +81,27 @@ class TournamentController:
         tour_ids_in_match =[]
         tournament = Tournament()
         first_list_tour = tournament.generate_first_pairs_players()
-        first_tour = Tour(list_of_match=first_list_tour)
-        first_tour.mettre_jour_score()
-        tournament.list_of_tours.append(Match.list_match_finiched)
-        print(tournament.list_of_tours)
+        first_tour = Tour()
+        first_tour.mettre_jour_score(first_list_tour)
+        first_tour.list_match_finiched = Match.list_match_finiched
+        print(first_tour.list_match_finiched)
 
         Match.list_match_finiched = []
 
         for i in range(2, tournament.number_of_tours + 1):
             print( "Roud" + str(i) + ": ---- The Others Round in Tourny  ---- ")
             others_list_tour = tournament.generate_others_pairs_players()
-            other_tour = Tour(list_of_match=others_list_tour)
-            other_tour.mettre_jour_score()
-            tournament.list_of_tours.append(Match.list_match_finiched)
+            other_tour = Tour()
+            other_tour.mettre_jour_score(others_list_tour)
+            other_tour.list_match_finiched = Match.list_match_finiched
             Match.list_match_finiched = []
-            print(tournament.list_of_tours)
+            print(other_tour.list_match_finiched )
 
 
 
 
-
-
-
-
-
-control = TournamentController()
-control.run_tournament()
+#control = TournamentController()
+#control.run_tournament()
 
 #control.save_tournament_statement(obj)
 

@@ -1,14 +1,9 @@
 from models.players import Player
-from models.tournaments import Tournament, Tour, Match
 from controllers.controller import PlayerController, TournamentController
 
 control = TournamentController()
 control.run_tournament()
 
-#control.save_tournament_statement(obj)
-
-tour = Tournament()
-print(tour.__repr__())
 
 class PlayersDiplay:
     """Display all the players in the database"""

@@ -1,6 +1,10 @@
 
 from tinydb import TinyDB
-chmin_data = 'C:/Users/Itec Global Services/PycharmProjects/Projet_OC04/data/'
+import os
+import sys
+
+sys.path.append(os.getcwd())
+data_path = f'{os.getcwd()}\data\\'
 
 
 class Player:
@@ -21,7 +25,7 @@ class Player:
         self.rank = rank
         self.tournament_score = tournament_score
 
-        self.data_players = TinyDB(chmin_data + 'player.json')
+        self.data_players = TinyDB(data_path + 'player.json')
 
     def serialize_player(self):
         """Return serialized info for player """
@@ -137,7 +141,7 @@ class Player:
 
     def load_player_db(self):
         """Load player database and return: list of players"""
-        players_db = TinyDB(chmin_data + 'player.json')
+        players_db = TinyDB(data_path + 'player.json')
         players_db.all()
         players = []
         for item in players_db:
