@@ -1,10 +1,11 @@
-from controllers.controller import TournamentController
+
+from controllers import main_controllers
 
 
 def main():
 
-    control = TournamentController()
-    control.run_tournament()
+    menu_control = main_controllers.HomeMenuController()
+    menu_control()
 
 
 if __name__ == "__main__":
