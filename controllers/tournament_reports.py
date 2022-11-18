@@ -40,24 +40,21 @@ class TournamentReports:
                 for tour in [1, 2, 3, 4]:
                     round = round_table.get(doc_id=tour)
                     print(f"Nom : {round['name']} - Début: {round['begin_time']} - Fin : {round['end_time']}")
-                input("Appuyez sur une touche pour revenir au menu rapport de tournoi")
 
             if entry == "3":
                 for id_round in [1, 2, 3, 4]:
                     round = round_table.get(doc_id=id_round)
-                    print(f"{round['name']} :")
+                    print(f"Round {id_round} :")
                     for match in round['list_match_finished']:
-                        print(match)
                         player_1 = match[0][0]
                         player_1 = self.player_db.get(doc_id=player_1)
                         score_player_1 = match[0][1]
                         player_2 = match[1][0]
                         player_2 = self.player_db.get(doc_id=player_2)
                         score_player_2 = match[1][1]
-                        print(f"Match : {player_1['first_name']} {player_1['last_name']} -- "
+                        print(f"Match : {player_1['first_name']} {player_1['last_name']} --CONTRE-- "
                               f"{player_2['first_name']} {player_2['last_name']}\n"
                               f"Score : {score_player_1} -- {score_player_2}\n")
 
             if entry == "4":
                 TournamentReports.__call__(self)
-

@@ -18,12 +18,12 @@ class Match:
             self.players[0].tournament_score += 1/2
             self.players[1].tournament_score += 1/2
             self.duel_match = [(self.players[1].player_id, self.players[1].tournament_score),
-                    (self.players[0].player_id, self.players[0].tournament_score)]
+                               (self.players[0].player_id, self.players[0].tournament_score)]
 
         elif winner == 0 or winner == 1:
 
             self.players[winner].tournament_score += 1
             self.duel_match = [(self.players[1].player_id, self.players[1].tournament_score),
-                      (self.players[0].player_id, self.players[0].tournament_score)]
+                               (self.players[0].player_id, self.players[0].tournament_score)]
 
         Match.list_match_finished.append(self.duel_match)

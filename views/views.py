@@ -24,7 +24,8 @@ class PlayersDiplay:
             list_players_to_database.append(player.unserialized_player(one_player))
 
         for player in list_players_to_database:
-            print(f"{player.player_id} -- Prenom/Nom : {player.first_name} {player.last_name} -- Classement : {player.rank}")
+            print(f"{player.player_id} -- Prenom/Nom : {player.first_name} "
+                  f"{player.last_name} -- Classement : {player.rank}")
 
 
 class ClearScreen:
@@ -75,4 +76,3 @@ class DisplayTournamentsReport:
             for player in players_list:
                 print(f"Joueurs : {player.last_name} - {player.first_name} - Classement : {player.rank}")
             print()
-

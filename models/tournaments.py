@@ -5,6 +5,7 @@ from tinydb import TinyDB
 
 data_path = "C:\\Users\\Itec Global Services\\PycharmProjects\\Projet_OC04\\data\\"
 
+
 class Tournament:
 
     def __init__(self, tournament_name=None,
@@ -29,7 +30,7 @@ class Tournament:
         self.data_tournament = TinyDB(data_path + 'tournament.json')
 
     def __str__(self):
-            return f"Liste des matchs : {self.list_of_tours})."
+        return f"Liste des matchs : {self.list_of_tours})."
 
     def serialized_tournament(self):
         """Return serialized tournament info"""
@@ -53,15 +54,8 @@ class Tournament:
         description = serialized_tournament["description"]
         players_id = serialized_tournament["players_id"]
         tournament_id = serialized_tournament["tournament_id"]
-        return Tournament(tournament_name,
-                      locality,
-                      tournament_date,
-                      number_of_tours,
-                      time_control,
-                      description,
-                      players_id,
-                      tournament_id
-                      )
+        return Tournament(tournament_name, locality, tournament_date,
+                          number_of_tours, time_control, description, players_id, tournament_id)
 
     def save_tournament_db(self):
         """add new Tournament to database and Set tournament_id to doc id """
@@ -113,4 +107,3 @@ class Tournament:
         list_of_others_tours = list(list_of_others_tours)
 
         return list_of_others_tours
-

@@ -1,6 +1,6 @@
 from operator import attrgetter
 from views import menu
-from models  import players
+from models import players
 from views import views
 
 

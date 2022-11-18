@@ -21,15 +21,15 @@ class TournamentController:
             self.prompt_tournament_time_control(),
             self.prompt_tournament_description(),
             self.add_players_id_to_tournament(),
-            self.prompt_tournament_id()
-    ]
+            self.prompt_tournament_id()]
+
         return self.tournament_values
 
     def add_tournament(self):
         """Add Tournament to database json and return list of tournament"""
         self.nbt = 1
         for nb in range(0, self.nbt):
-            self.created_tournament= self.create_one_tournament()
+            self.created_tournament = self.create_one_tournament()
             tournament = Tournament(
                 tournament_name=self.created_tournament[0],
                 locality=self.created_tournament[1],

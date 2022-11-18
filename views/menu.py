@@ -17,35 +17,33 @@ class LoadMenus:
 
     @staticmethod
     def player_menu():
-
-       list_player_menu = [
-           "[1] - Créer un joueur",
-           "[2] - Mettre à jour le classement d'un joueur",
-           "[3] - Afficher les rapports des joueurs",
-           "[4] - Retour au menu principal"
-       ]
-       return list_player_menu
+        list_player_menu = [
+            "[1] - Créer un joueur",
+            "[2] - Mettre à jour le classement d'un joueur",
+            "[3] - Afficher les rapports des joueurs",
+            "[4] - Retour au menu principal"
+        ]
+        return list_player_menu
 
     @staticmethod
     def player_report_menu():
 
-       list_player_report_menu = [
-
-           "[1] - Afficher les joeurs par ordre alphabétique",
-           "[2] - Afficher les joeurs par ordre de classement",
-           "[3] - Retour au menu principal"
-       ]
-       return list_player_report_menu
+        list_player_report_menu = [
+            "[1] - Afficher les joeurs par ordre alphabétique",
+            "[2] - Afficher les joeurs par ordre de classement",
+            "[3] - Retour au menu principal"
+        ]
+        return list_player_report_menu
 
     @staticmethod
     def tournament_menu():
 
         list_tournament_menu = [
-         "[1] - Créer un nouveau tournoi",
-         "[2] - Ajouter des joueurs au tournoi",
-         "[3] - Lancer un tournoi existant",
-         "[4] - Afficher les rapports de tournoi",
-         "[5] - Retour au menu principal"
+            "[1] - Créer un nouveau tournoi",
+            "[2] - Ajouter des joueurs au tournoi",
+            "[3] - Lancer un tournoi existant",
+            "[4] - Afficher les rapports de tournoi",
+            "[5] - Retour au menu principal"
         ]
         return list_tournament_menu
 
@@ -53,11 +51,10 @@ class LoadMenus:
     def tournament_report_menu():
 
         list_tournament_report_menu = [
-
-         "[1] - Afficher les tournois",
-         "[2] - Afficher les tours d'un tournoi",
-         "[3] - Afficher les matchs d'un tournoi",
-         "[4] - Retour au menu principal"
+            "[1] - Afficher les tournois",
+            "[2] - Afficher les tours d'un tournoi",
+            "[3] - Afficher les match des tours",
+            "[4] - Retour au menu principal"
         ]
         return list_tournament_report_menu
 
@@ -81,6 +78,5 @@ class LoadMenus:
             for line in selected_menu:
                 line = line.split("-")[0][1]
                 if entry == line:
-                   return str(line)
+                    return str(line)
             print("Vous devez entrer le chiffre correspondant")
-

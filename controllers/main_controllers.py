@@ -89,4 +89,3 @@ class PlayerMenuController(HomeMenuController):
 class QuitAppController:
     def __call__(self):
         sys.exit()
-

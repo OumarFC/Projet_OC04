@@ -67,5 +67,3 @@ class Player:
             players.append(item)
 
         return players
-
-
