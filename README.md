@@ -30,7 +30,7 @@ Sous windows avec la commande :
 
 ```~\MyProject04\Scripts\activate.bat```
 		
-6 - Installer les package depuis le fichier requirements.txt
+6 - Installer les packages depuis le fichier requirements.txt
 	 
 sous windows avec la commande :
 
@@ -53,7 +53,7 @@ sous windows avec la commande :
      Pygments==2.13.0
      tinydb==4.7.0  	
      
-8 - Exclure l'environnement virtuel des commit sur le serveur distant 
+8 - Exclure l'environnement virtuel des commits sur le serveur distant 
 	
 Ajouter le fichier .gitignore à la racine de votre projet:   
 
@@ -63,7 +63,7 @@ Editer le fichier gitignore et ajouter les fichiers et repertoire que vous souha
 
 9 - Ajouter dans votre projet, les codes du projet 4 que vous avez recuperer dans Github :
         
-Le package comprend les repertoires et les fichiers
+Le package comprend des repertoires et les fichiers
 
 11 - Lancement 
 	
@@ -72,9 +72,9 @@ Ouvrer le cmd et taper :
 
 ```python main.py```
 
-12 - Execution du Flak8
+12 - Execution du Flake8
 
-Le projet contient un rapport flake8 qui n'affiche aucune violation de la norme PEP 8.
+Le projet contient un rapport flake8 qui n'affiche aucune violation des directives de style de code PEP 8.
 Pour executer un autre rapport :
 Depuis windows, activer l'envrionnement virtuel et taper dans le terminal
 
