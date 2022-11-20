@@ -1,6 +1,7 @@
-
+import os
 from tinydb import TinyDB
-data_path = "C:\\Users\\Itec Global Services\\PycharmProjects\\Projet_OC04\\data\\"
+
+data_path = f"{os.getcwd()}\\data\\"
 
 
 class Player:

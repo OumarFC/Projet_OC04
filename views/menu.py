@@ -20,7 +20,7 @@ class LoadMenus:
         list_player_menu = [
             "[1] - Créer un joueur",
             "[2] - Mettre à jour le classement d'un joueur",
-            "[3] - Afficher les rapports des joueurs",
+            "[3] - Afficher les rapports de matchs (sous-menu)",
             "[4] - Retour au menu principal"
         ]
         return list_player_menu
@@ -42,7 +42,7 @@ class LoadMenus:
             "[1] - Créer un nouveau tournoi",
             "[2] - Ajouter des joueurs au tournoi",
             "[3] - Lancer un tournoi existant",
-            "[4] - Afficher les rapports de tournoi",
+            "[4] - Afficher les rapports de tournoi (sous-menu)",
             "[5] - Retour au menu principal"
         ]
         return list_tournament_menu

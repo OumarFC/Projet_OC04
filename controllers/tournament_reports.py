@@ -1,6 +1,6 @@
-
-from views import menu
-from models import tournaments
+from views.menu import LoadMenus
+from models.tournaments import Tournament
+from controllers import main_controllers
 from models import players
 from views import views
 
@@ -9,9 +9,10 @@ class TournamentReports:
 
     def __call__(self):
         self.clear = views.ClearScreen()
-        self.tournament = tournaments.Tournament()
-        self.menu = menu.LoadMenus()
+        self.tournament = Tournament()
+        self.menu = LoadMenus()
         self.player = players.Player()
+        self.menu_control = main_controllers.HomeMenuController()
         self.display_tournament = views.DisplayTournamentsReport()
         self.tournament_db = self.tournament.data_tournament
         self.player_db = self.player.data_players
@@ -26,7 +27,7 @@ class TournamentReports:
 
             self.clear()
             self.display_tournament()
-            entry = str(menu.LoadMenus.load_menu(menu.LoadMenus.tournament_report_menu()))
+            entry = str(LoadMenus.load_menu(LoadMenus.tournament_report_menu()))
 
             if entry == "1":
                 for tournament in tournament_serialized:
@@ -40,6 +41,7 @@ class TournamentReports:
                 for tour in [1, 2, 3, 4]:
                     round = round_table.get(doc_id=tour)
                     print(f"Nom : {round['name']} - Début: {round['begin_time']} - Fin : {round['end_time']}")
+                TournamentReports.__call__(self)
 
             if entry == "3":
                 for id_round in [1, 2, 3, 4]:
@@ -55,6 +57,7 @@ class TournamentReports:
                         print(f"Match : {player_1['first_name']} {player_1['last_name']} --CONTRE-- "
                               f"{player_2['first_name']} {player_2['last_name']}\n"
                               f"Score : {score_player_1} -- {score_player_2}\n")
+                TournamentReports.__call__(self)
 
             if entry == "4":
-                TournamentReports.__call__(self)
+                self.menu_control()

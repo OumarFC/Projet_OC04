@@ -8,7 +8,7 @@ class MainDisplay:
     def display_title(self):
         print("\n\n//**************************************//")
         print("//       BIENVENUE DANS LE TOURNOI       //")
-        print("//         DE JEUX D'ECHEC SUISS         //")
+        print("//         DE JEUX D'ECHEC SUISSE        //")
         print("//**************************************//")
 
 

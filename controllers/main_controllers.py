@@ -1,8 +1,8 @@
 import sys
 from views import views, menu
 from controllers import tournament_controller
-from controllers import player_controller
 from controllers import player_reports
+from controllers import player_controller
 from controllers import tournament_reports
 
 
@@ -50,7 +50,9 @@ class TournamentMenuController(HomeMenuController):
         self.tournament_reports = tournament_reports.TournamentReports()
 
     def __call__(self):
+
         entry = self.create_menu.load_menu(self.create_menu.tournament_menu())
+
         if entry == "1":
             self.choice_controller = self.create_tournament.add_tournament()
         if entry == "2":
