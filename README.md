@@ -79,3 +79,5 @@ Pour executer un autre rapport :
 Depuis windows, activer l'envrionnement virtuel et taper dans le terminal
 
 ```flake8 "~\MyProject04" --format=html --htmldir="~\MyProject04\\flake8_rapport"```
+
+Le fichier setup.cfg contient d'autres parametres pour le traitement flake8

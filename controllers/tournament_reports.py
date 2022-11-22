@@ -36,6 +36,7 @@ class TournamentReports:
                         player_serialized.append(self.player.unserialized_player(player))
                 self.display_tournament.display_tournaments(tournament_serialized, player_serialized)
                 player_serialized.clear()
+                TournamentReports.__call__(self)
 
             if entry == "2":
                 for tour in [1, 2, 3, 4]:
