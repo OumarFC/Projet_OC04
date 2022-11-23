@@ -7,7 +7,7 @@
 
 + [Installation du projet](#Installation)
 + [Installation des packages](#Packages)
-+ [Le fichier .gitignore](#.gitignore)
++ [Le fichier .gitignore](#gitignore)
 + [Lancement des traitements](#Traitement)
 + [Execution de flak8](#Flake8)
 
@@ -64,7 +64,7 @@ sous windows avec la commande :
      Pygments==2.13.0
      tinydb==4.7.0  	
   
-## .gitignore
+## gitignore
 
 - Exclure l'environnement virtuel des commits sur le serveur distant 
 	
