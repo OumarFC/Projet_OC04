@@ -5,13 +5,13 @@
 
 ## Sommaire
 
-+ [Installation](#Installation en ligne de commande)
-+ [Installation des packages](#Installation des Packages)
-+ [Le fichier .gitignore](#Le fichier.gitignore)
++ [Installation](#Installation)
++ [Installation des packages](#Packages)
++ [Le fichier .gitignore](#.gitignore)
 + [Lancement des traitements](#Traitement)
 + [Execution de flak8](#Flake8)
 
-## Installation en ligne de commande
+## Installatio
   
   1- Telecharger et installer la dernière version de Python.
   Pour ma part j'ai installé la version python 3.10.6
@@ -39,7 +39,7 @@ Sous windows avec la commande :
 
 ```~\MyProject04\Scripts\activate.bat```
 
-## Installation des Packages
+## Packages
 
  - Installez les packages depuis le fichier requirements.txt
 	 
@@ -64,7 +64,7 @@ sous windows avec la commande :
      Pygments==2.13.0
      tinydb==4.7.0  	
   
-## Le fichier .gitignore
+## .gitignore
 
 - Exclure l'environnement virtuel des commits sur le serveur distant 
 	
