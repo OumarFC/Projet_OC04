@@ -5,7 +5,7 @@
 
 ## Sommaire
 
-+ [Installation](#Installation)
++ [Installation du projet](#Installation)
 + [Installation des packages](#Packages)
 + [Le fichier .gitignore](#.gitignore)
 + [Lancement des traitements](#Traitement)
