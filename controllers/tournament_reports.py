@@ -8,7 +8,6 @@ from views import views
 class TournamentReports:
 
     def __call__(self):
-        self.clear = views.ClearScreen()
         self.tournament = Tournament()
         self.menu = LoadMenus()
         self.player = players.Player()
@@ -25,7 +24,6 @@ class TournamentReports:
             tournament_objects.append(tournament)
             tournament_serialized.append(self.tournament.unserialized_tournament(tournament))
 
-            self.clear()
             self.display_tournament()
             entry = str(LoadMenus.load_menu(LoadMenus.tournament_report_menu()))
 

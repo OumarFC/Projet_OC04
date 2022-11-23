@@ -26,7 +26,7 @@ class TournamentController:
         return self.tournament_values
 
     def add_tournament(self):
-        """Add Tournament to database json and return list of tournament"""
+        """Add Tournament to database json """
         self.nbt = 1
         for nb in range(0, self.nbt):
             self.created_tournament = self.create_one_tournament()

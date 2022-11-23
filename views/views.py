@@ -1,5 +1,4 @@
 from models.players import Player
-from os import system, name
 
 
 class MainDisplay:
@@ -13,7 +12,7 @@ class MainDisplay:
 
 
 class PlayersDiplay:
-    """Display all the players in the database"""
+    """Display all the players  and these rank in the database"""
 
     def __call__(self):
         player = Player()
@@ -26,17 +25,6 @@ class PlayersDiplay:
         for player in list_players_to_database:
             print(f"{player.player_id} -- Prenom/Nom : {player.first_name} "
                   f"{player.last_name} -- Classement : {player.rank}")
-
-
-class ClearScreen:
-    """Clear the terminal"""
-    def __call__(self):
-        # for windows
-        if name == 'nt':
-            _ = system('cls')
-        # for mac and linux(here, os.name is 'posix')
-        else:
-            _ = system('clear')
 
 
 class DisplayPlayersReport:

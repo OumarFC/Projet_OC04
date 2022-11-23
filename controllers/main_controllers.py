@@ -7,16 +7,13 @@ from controllers import tournament_reports
 
 
 class HomeMenuController:
-    """Display the title and leads to the main menu"""
 
     def __init__(self):
         self.create_menu = menu.LoadMenus()
         self.view = views.MainDisplay()
-        self.clear = views.ClearScreen()
         self.choice_controller = None
 
     def __call__(self):
-        self.clear()
         self.view.display_title()
         entry = self.create_menu.load_menu(self.create_menu.main_menu())
 
