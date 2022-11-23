@@ -11,7 +11,7 @@
 + [Lancement des traitements](#Traitement)
 + [Execution de flak8](#Flake8)
 
-## Installatio
+## Installation
   
   1- Telecharger et installer la dernière version de Python.
   Pour ma part j'ai installé la version python 3.10.6
@@ -87,7 +87,7 @@ Ouvrer le cmd et taper :
 
 ```python main.py```
 
-#  Flake8
+## Flake8
 
 Le projet contient un rapport flake8 qui n'affiche aucune violation des directives de style de code PEP 8.
 Pour executer un autre rapport :
