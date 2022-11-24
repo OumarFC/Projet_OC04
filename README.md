@@ -82,10 +82,14 @@ Le package comprend des repertoires et les fichiers
 
 - Execution du traitement
 	
-Sous windows, lancer le fichier main.py pour executer le projet
-Ouvrer le cmd et taper : 
+Sous windows, lancer le fichier main.py pour exécuter le projet
+- Ouvrer le console cmd
+- Tapez les commandes suivantes 
 
-```python main.py```
+```cd ~\MyProject04\Myenv\script
+activate.bat
+python main.py
+```
 
 ## Flake8
 
