@@ -7,7 +7,7 @@ from controllers import tournament_reports
 
 
 class HomeMenuController:
-
+    """Initialyze Home menu controller"""
     def __init__(self):
         self.create_menu = menu.LoadMenus()
         self.view = views.MainDisplay()

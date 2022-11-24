@@ -6,7 +6,7 @@ from views.menu import LoadMenus
 
 
 class TournamentController:
-
+    """for add informations tournament in data base tournament"""
     def __init__(self):
 
         self.tournament_values = []

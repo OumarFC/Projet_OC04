@@ -25,22 +25,25 @@ pour cela lancer la commande
 
 - Créer votre dossier projet sous windows
 	     
-```mkdir < MyProject04 > ``` où MyProject04 est le nom de votre projet
-
-```cd < monProjet4 > ```	
-
-- Créer votre environnement virtuel
-	  
-```pip -m venv < myenv > ``` où myenv est le nom pour votre environnemet virtuel
-		
-- Activer votre environnement virtuel
-	    
-Sous windows avec la commande :  
-
-```~\MyProject04\Scripts\activate.bat```
-
+```
+mkdir < MyProject04 > 
+```
+où MyProject04 est le nom de votre projet
+Placez vous dans le repertoire projet
+```
+cd < MyProject04 > 
+```
+Créer votre environnement virtuel
+```
+pip -m venv < myenv > 
+```
+Où myenv est le nom pour votre environnemet virtuel.
+Activez votre environnement virtuel.
+```
+cd < myenv\scripts> 
+activate.bat
+```
 ## Packages
-
  - Installez les packages depuis le fichier requirements.txt
 	 
 sous windows avec la commande :
@@ -81,22 +84,22 @@ Editez le fichier .gitignore et ajouter les fichiers et repertoire que vous souh
 Le package comprend des repertoires et les fichiers
 
 - Execution du traitement
-	
-Sous windows, lancer le fichier main.py pour exécuter le projet
-- Ouvrer le console cmd
-- Tapez les commandes suivantes 
+Assurez-vous que votre environnement virtuel est activé.
+Sous windows, à la racine du projet, lancer le fichier main.py pour exécuter le projet.
 
-```cd ~\MyProject04\Myenv\script
-activate.bat
-python main.py
 ```
-
+cd < MyProject04 > 
+main.py
+```
 ## Flake8
 
 Le projet contient un rapport flake8 qui n'affiche aucune violation des directives de style de code PEP 8.
-Pour executer un autre rapport :
-Depuis windows, activer l'envrionnement virtuel et taper dans le terminal
+Pour executer un autre rapport depuis windows
+Toujours à la racine du projet:
 
-```flake8 "~\MyProject04" --format=html --htmldir="~\MyProject04\\flake8_rapport"```
+```
+cd < MyProject04 > 
+flake8 --format=html --htmldir=flake8_rapport
+```
 
 Le fichier setup.cfg contient d'autres parametres pour le traitement flake8

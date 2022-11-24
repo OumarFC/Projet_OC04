@@ -28,6 +28,7 @@ class PlayersDiplay:
 
 
 class DisplayPlayersReport:
+    """Display all the players by alphabetical and by rank """
 
     def __call__(self):
         print("------------------------------------------------\n"
@@ -47,7 +48,7 @@ class DisplayPlayersReport:
 
 
 class DisplayTournamentsReport:
-
+    """Display all the tournament and players"""
     def __call__(self):
         print("------------------------------------------------\n"
               "---------Affichage de Rapport de tournois ------\n"

@@ -64,7 +64,7 @@ class Tournament:
         tournament_db.update({'tournament_id': self.tournament_id}, doc_ids=[int(self.tournament_id)])
 
     def sort_players_by_rank(self):
-        """Sort players by rank (ascending) and make player as objet"""
+        """Sort players by rank """
         player = Player()
         list_players = player.load_player_db()
         players_by_rank = sorted(list_players, key=lambda x: x.get('rank'))
@@ -75,7 +75,7 @@ class Tournament:
         return list_all_players_objet
 
     def sort_players_by_score(self):
-        """Sort players by score (descending) and make player as objet"""
+        """Sort players by score"""
         player = Player()
         list_players = player.load_player_db()
         players_by_score = sorted(list_players, key=lambda x: x.get('tournament_score'), reverse=True)

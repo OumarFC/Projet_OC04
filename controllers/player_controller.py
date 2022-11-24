@@ -21,7 +21,7 @@ class PlayerController:
         return self.players_values
 
     def add_players(self):
-        """Add players to database json and return list of players"""
+        """Add players to database json"""
         for nb in [*range(0, 8)]:
 
             self.created_players = self.create_one_player()
