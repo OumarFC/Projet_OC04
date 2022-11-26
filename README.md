@@ -28,8 +28,8 @@ pour cela lancer la commande
 ```
 mkdir < MyProject04 > 
 ```
-où MyProject04 est le nom de votre projet
-Placez vous dans le repertoire projet
+où MyProject04 est le nom de votre projet,
+placez vous dans le repertoire projet
 ```
 cd < MyProject04 > 
 ```

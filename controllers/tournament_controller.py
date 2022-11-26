@@ -1,8 +1,11 @@
+from controllers import main_controllers
 from models.tournaments import Tournament
 from models import tours
 from models import matchs
 from datetime import datetime
 from views.menu import LoadMenus
+from views.views import DisplayTournamentsReport
+import time
 
 
 class TournamentController:
@@ -27,6 +30,8 @@ class TournamentController:
 
     def add_tournament(self):
         """Add Tournament to database json """
+        self.menu_control = main_controllers.HomeMenuController()
+        self.menu = LoadMenus()
         self.nbt = 1
         for nb in range(0, self.nbt):
             self.created_tournament = self.create_one_tournament()
@@ -41,6 +46,8 @@ class TournamentController:
                 tournament_id=self.created_tournament[6]
             )
             tournament.save_tournament_db()
+
+        self.menu_control()
 
     def add_players_id_to_tournament(self):
 
@@ -119,9 +126,34 @@ class TournamentController:
 
         return int(tournament_valid_id)
 
+    def select_tournament(self):
+        home_menu_controller = main_controllers.HomeMenuController()
+        tournament = Tournament()
+        display_tournament = DisplayTournamentsReport()
+
+        valid_entry = False
+        while not valid_entry:
+                print("Entrez le chiffre correspondant au tournoi")
+                choice = input("--> ")
+                if choice.isdigit() and choice != "" and int(choice) == 0:
+                    print("Vous devez entrer le chiffre correspondant au tournoi à lancer")
+                else:
+                    choice_tournament = tournament.data_tournament.get(doc_id=int(choice))
+                    tournament_object = tournament.unserialized_tournament(choice_tournament)
+                    return tournament_object
+
+        else:
+            print("Pas de tournois créé, veuillez créer un tournoi")
+            time.sleep(1)
+            home_menu_controller()
+
     @staticmethod
     def run_tournament():
         """Create first round and update player score"""
+        tes = TournamentController()
+        tourny = tes.select_tournament()
+        print(tourny.tournament_name)
+        home_menu_controller = main_controllers.HomeMenuController()
         tournament = Tournament()
         first_list_tour = tournament.generate_first_pairs_players()
         first_tour = tours.Tour()
@@ -132,10 +164,8 @@ class TournamentController:
         first_tour.list_match_finished = matchs.Match.list_match_finished
         tours_table = tournament.data_tournament.table("Rounds")
         tours_table.insert(first_tour.serialize_tour())
-
         first_tour.end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        print(tours_table)
         print(first_tour.list_match_finished)
 
         matchs.Match.list_match_finished.clear()
@@ -154,6 +184,7 @@ class TournamentController:
             other_tour.end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             tours_table.insert(other_tour.serialize_tour())
 
-            print(tours_table)
             print(other_tour.list_match_finished)
             matchs.Match.list_match_finished.clear()
+
+        home_menu_controller()

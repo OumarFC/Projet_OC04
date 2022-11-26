@@ -1,4 +1,6 @@
+from controllers import main_controllers
 from models import players
+from views.menu import LoadMenus
 
 
 class PlayerController:
@@ -22,6 +24,8 @@ class PlayerController:
 
     def add_players(self):
         """Add players to database json"""
+        self.menu_control = main_controllers.HomeMenuController()
+
         for nb in [*range(0, 8)]:
 
             self.created_players = self.create_one_player()
@@ -35,6 +39,8 @@ class PlayerController:
                 tournament_score=self.created_players[6]
             )
             player.save_player_db()
+
+        self.menu_control()
 
     def prompt_first_name(self):
         first_name = None
@@ -121,7 +127,8 @@ class PlayerController:
         return int(player_id)
 
     def update_rank(self):
-
+        self.menu = LoadMenus()
+        self.menu_control = main_controllers.HomeMenuController()
         player = players.Player()
         players_db = player.data_players
 
@@ -151,3 +158,5 @@ class PlayerController:
         print(f"Player : {player_to_modify['first_name']} {player_to_modify['last_name']} \n"
               f"new rank : {player_to_modify['rank']}")
         players_db.update({"rank": int(new_rank)}, doc_ids=[int(player_id)])
+
+        self.menu_control()

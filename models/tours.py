@@ -36,4 +36,6 @@ class Tour:
             winner = int(input(" Enter Winner Id -->"))
 
             instance_match = Match(match)
+            print(instance_match.__str__())
             instance_match.run_match(winner)
+

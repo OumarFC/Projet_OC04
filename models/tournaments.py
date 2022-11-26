@@ -3,7 +3,8 @@ from models.players import Player
 from numpy import array
 from tinydb import TinyDB
 
-data_path = f'{os.getcwd()}\\data\\'
+#data_path = f'{os.getcwd()}\\data\\'
+data_path = "C:\\Users\\Itec Global Services\\PycharmProjects\\Projet_OC04\\data\\"
 
 
 class Tournament:
@@ -15,7 +16,6 @@ class Tournament:
                  time_control=None,
                  description=None,
                  players_id=[],
-                 list_of_tours=[],
                  tournament_id=None
                  ):
 
@@ -28,9 +28,6 @@ class Tournament:
         self.players_id = players_id
         self.tournament_id = tournament_id
         self.data_tournament = TinyDB(data_path + 'tournament.json')
-
-    def __str__(self):
-        return f"Liste des matchs : {self.list_of_tours})."
 
     def serialized_tournament(self):
         """Return serialized tournament info"""
