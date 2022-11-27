@@ -32,7 +32,9 @@ class Tour:
     def update_score(list_of_match):
 
         for match in list_of_match:
-            """ make a match and put the score of the players who compete"""
+
+            print(match)
+            """ make a match and put the score of the players who competed"""
             winner = int(input(" Enter Winner Id -->"))
 
             instance_match = Match(match)
