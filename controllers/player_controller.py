@@ -1,6 +1,7 @@
 from controllers import main_controllers
 from models import players
 from views.menu import LoadMenus
+import time
 
 
 class PlayerController:
@@ -8,9 +9,9 @@ class PlayerController:
     def __init__(self):
         self.players_values = []
         self.created_players = []
+        self.player = players.Player()
 
     def create_one_player(self):
-        self.player = players.Player()
         self.players_values = [
             self.prompt_player_id(),
             self.prompt_first_name(),
@@ -28,18 +29,26 @@ class PlayerController:
 
         for nb in [*range(0, 8)]:
 
-            self.created_players = self.create_one_player()
-            player = players.Player(
-                player_id=self.created_players[0],
-                first_name=self.created_players[1],
-                last_name=self.created_players[2],
-                date_of_birth=self.created_players[3],
-                gender=self.created_players[4],
-                rank=self.created_players[5],
-                tournament_score=self.created_players[6]
-            )
-            player.save_player_db()
+            if len(self.player.data_players) < 9:
 
+                self.created_players = self.create_one_player()
+                player = players.Player(
+                    player_id=self.created_players[0],
+                    first_name=self.created_players[1],
+                    last_name=self.created_players[2],
+                    date_of_birth=self.created_players[3],
+                    gender=self.created_players[4],
+                    rank=self.created_players[5],
+                    tournament_score=self.created_players[6]
+                )
+                player.save_player_db()
+            else:
+                print()
+                print("Le nombre est atteint ! ")
+                print("Le nombre de joueur dans le tournoi ne doit pas dépasser 8")
+                print("Retour au menu principal")
+                time.sleep(2)
+                self.menu_control()
         self.menu_control()
 
     def prompt_first_name(self):
@@ -100,7 +109,7 @@ class PlayerController:
             else:
                 print("You must enter a valid rank")
 
-        return rank
+        return int(rank)
 
     def prompt_tournament_score(self):
         tournament_score = None
