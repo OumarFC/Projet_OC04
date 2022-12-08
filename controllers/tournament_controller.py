@@ -9,14 +9,20 @@ import time
 
 
 class TournamentController:
+
+    PLAYER_IN_TOURNAMENT = []
+
     """for add informations tournament in data base tournament"""
     def __init__(self):
 
+        self.tournament = Tournament()
+        self.tour = tours.Tour()
         self.tournament_values = []
+        self.display_report = DisplayTournamentsReport()
+        self.tournament_db = self.tournament.data_tournament
 
     def create_one_tournament(self):
 
-        self.tournament = Tournament()
         self.tournament_values = [
             self.prompt_tournament_name(),
             self.prompt_tournament_locality(),
@@ -47,7 +53,7 @@ class TournamentController:
             )
             tournament.save_tournament_db()
 
-        self.menu_control()
+        #self.menu_control()
 
     def add_players_id_to_tournament(self):
 
@@ -126,65 +132,68 @@ class TournamentController:
 
         return int(tournament_valid_id)
 
-    def select_tournament(self):
-        home_menu_controller = main_controllers.HomeMenuController()
-        tournament = Tournament()
-        display_tournament = DisplayTournamentsReport()
-
+    def tournament_select(self):
         valid_entry = False
+        tournament_objects = []
+        tournament_serialized = []
         while not valid_entry:
-                print("Entrez le chiffre correspondant au tournoi")
-                choice = input("--> ")
-                if choice.isdigit() and choice != "" and int(choice) == 0:
-                    print("Vous devez entrer le chiffre correspondant au tournoi à lancer")
-                else:
-                    choice_tournament = tournament.data_tournament.get(doc_id=int(choice))
-                    tournament_object = tournament.unserialized_tournament(choice_tournament)
-                    return tournament_object
-
-        else:
-            print("Pas de tournois créé, veuillez créer un tournoi")
+            for tournament in self.tournament_db:
+                tournament_objects.append(tournament)
+                tournament_serialized.append(self.tournament.unserialized_tournament(tournament))
+            print("-----Liste des Tournoi -----")
+            for tournament in tournament_serialized:
+                print(f"{tournament.tournament_name} - {tournament.locality} - {tournament.tournament_date}\n"
+                      f"ID du Tournoi : {tournament.tournament_id}\n"
+                      f"Nombre de tours : {tournament.number_of_tours}\n"
+                      f"Contrôle du temps : {tournament.time_control}\n"
+                      f"Description : {tournament.description}\n"
+                      )
+            print("Saisissez l'ID du tournoi correspondant : ")
+            choice = input("--> ")
             time.sleep(1)
-            home_menu_controller()
+            try:
+                choice.isdigit() is False
+                int(choice) < len(self.tournament.data_tournament)
+                int(choice) <= 0
+            except Exception:
+                print("Saisissez un chiffre correspondant au tournoi")
+            else:
+                choice_tournament = self.tournament.data_tournament.get(doc_id=int(choice))
+                objet_tournament = self.tournament.unserialized_tournament(choice_tournament)
+                return objet_tournament
+        else:
+            print("Aucun tournoi créé - Veillez créer un tournoi")
 
-    @staticmethod
-    def run_tournament():
+    def run_tournament(self):
         """Create first round and update player score"""
-        tes = TournamentController()
-        tourny = tes.select_tournament()
-        print(tourny.tournament_name)
         home_menu_controller = main_controllers.HomeMenuController()
-        tournament = Tournament()
-        first_list_tour = tournament.generate_first_pairs_players()
-        first_tour = tours.Tour()
-        first_tour.name = "Round1"
-        first_tour.begin_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        first_tour.update_score(first_list_tour)
+        first_list_tour = self.tournament.generate_first_pairs_players(self.tournament_select())
+        self.tour.name = "Tour1"
+        self.tour.begin_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.tour.update_score(first_list_tour)
 
-        first_tour.list_match_finished = matchs.Match.list_match_finished
-        tours_table = tournament.data_tournament.table("Rounds")
-        tours_table.insert(first_tour.serialize_tour())
-        first_tour.end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.tour.list_match_finished = matchs.Match.list_match_finished
+        tours_table = self.tournament.data_tournament.table("Rounds")
+        tours_table.insert(self.tour.serialize_tour())
+        self.tour.end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        print(first_tour.list_match_finished)
+        print(f"{self.tour.name} : {self.tour.list_match_finished}")
 
-        matchs.Match.list_match_finished.clear()
-
-        for i in range(2, tournament.number_of_tours + 1):
-
-            print("Round" + str(i) + ": ---- The next Others Round in Tournament  ---- ")
-            others_list_tour = tournament.generate_others_pairs_players()
-            other_tour = tours.Tour()
-            other_tour.name = "Round" + str(i)
-
-            other_tour.begin_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            other_tour.update_score(others_list_tour)
-            other_tour.list_match_finished = matchs.Match.list_match_finished
-
-            other_tour.end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            tours_table.insert(other_tour.serialize_tour())
-
-            print(other_tour.list_match_finished)
+        for i in range(2, self.tournament.number_of_tours + 1):
+            print("Tour" + str(i) + ": ---- Ajout des Joueurs au Tour suivant---- ")
+            others_list_tour = self.tournament.generate_others_pairs_players(self.tour.list_match_finished)
             matchs.Match.list_match_finished.clear()
+            self.tour.name = "Tour" + str(i)
+
+            self.tour.begin_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            print(" ------ Mise à jour du score des joueurs --- ")
+            self.tour.update_score(others_list_tour)
+            self.tour.list_match_finished = matchs.Match.list_match_finished
+            print(Tournament.MATCH_IN_TOURNAMENT)
+            self.tour.end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            tours_table.insert(self.tour.serialize_tour())
+
+            print(f"{self.tour.name} : {self.tour.list_match_finished}")
+            others_list_tour.clear()
 
         home_menu_controller()

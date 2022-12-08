@@ -65,3 +65,11 @@ class DisplayTournamentsReport:
             for player in players_list:
                 print(f"Joueurs : {player.last_name} - {player.first_name} - Classement : {player.rank}")
             print()
+
+    def display_tournamentss(self, tournaments_list):
+        for tournament in tournaments_list:
+            print(f"{tournament.tournament_name} - {tournament.locality} - {tournament.tournament_date}\n"
+                  f"Nombre de tours : {tournament.number_of_tours}\n"
+                  f"Contrôle du temps : {tournament.time_control}\n"
+                  f"Description : {tournament.description}\n"
+                  )

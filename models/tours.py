@@ -28,16 +28,30 @@ class Tour:
 
         return Tour(name, begin_time, end_time, list_match_finished)
 
-    @staticmethod
-    def update_score(list_of_match):
+    def valid_winner(self):
+
+        winner = None
+        valid_win = False
+        while not valid_win:
+            print("Saisissez L'ID du joueur vainqueur:")
+            print("[0] - Joueur 1 est gagnant")
+            print("[1] - Joueur 2 est gagnant")
+            print("[2] - Egalité joueur 1 et joueur 2")
+            winner = int(input("--->"))
+            if winner in [1, 2, 0]:
+                valid_win = True
+            else:
+                print("Vous devez saisir une valeur entre 0, 1 ou 2")
+
+        return winner
+
+    def update_score(self, list_of_match):
 
         for match in list_of_match:
 
-            print(match)
             """ make a match and put the score of the players who competed"""
-            winner = int(input(" Enter Winner Id -->"))
+            winner = self.valid_winner()
 
             instance_match = Match(match)
             print(instance_match.__str__())
             instance_match.run_match(winner)
-

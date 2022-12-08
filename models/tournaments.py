@@ -1,13 +1,20 @@
 import os
 from models.players import Player
+from models.matchs import Match
+from  models.tours import Tour
 from numpy import array
 from tinydb import TinyDB
+import copy
+from operator import attrgetter
+import time
 
-data_path = f'{os.getcwd()}\\data\\'
-
+#data_path = f'{os.getcwd()}\\data\\'
+data_path="C:\\Users\\Itec Global Services\\PycharmProjects\\Projet_OC04\\data\\"
 
 
 class Tournament:
+
+    MATCH_IN_TOURNAMENT = []
 
     def __init__(self, tournament_name=None,
                  locality=None,
@@ -39,7 +46,7 @@ class Tournament:
             "time_control": self.time_control,
             "description": self.description,
             "players_id": self.players_id,
-            "tournament_id": self.tournament_id,
+            "tournament_id": self.tournament_id
         }
 
     def unserialized_tournament(self, serialized_tournament):
@@ -83,24 +90,82 @@ class Tournament:
 
         return list_all_players_objet
 
-    def generate_first_pairs_players(self):
-        list_all_players = self.sort_players_by_rank()
-        half = int(len(list_all_players) / 2)
-        first_list = list_all_players[half:]
-        second_list = list_all_players[:half]
-        list_of_first_tours = list(zip(first_list, second_list))
-        print("Round 1 :  First Round ")
-
+    def generate_first_pairs_players(self, objet_tournament):
+        """ return a list of players sorted by ranking"""
+        self.player = Player()
+        sorted_players = []
+        players_instances = []
+        list_of_first_tours = []
+        for id in objet_tournament.players_id:
+            player = self.player.data_players.get(doc_id=id)
+            player = self.player.unserialized_player(player)
+            players_instances.append(player)
+        for player in players_instances:
+            player_1 = player
+            index_player_1 = players_instances.index(player)
+            if index_player_1 + len(objet_tournament.players_id) / 2 < len(objet_tournament.players_id):
+                index_player_2 = index_player_1 + int(len(objet_tournament.players_id) / 2)
+                player_2 = players_instances[index_player_2]
+                sorted_players.append(player_1)
+                sorted_players.append(player_2)
+                list_of_first_tours.append((player_1, player_2))
+                self.MATCH_IN_TOURNAMENT.append({player_1.player_id, player_2.player_id})
+            else:
+                pass
         return list_of_first_tours
 
-    def generate_others_pairs_players(self):
+    def generate_others_pairs_players(self, list_of_finished_matchs):
+        """ return a list of players sorted by score"""
+        self.player = Player()
+        self.tour = Tour()
+        players = []
+        players_sorted_by_score = []
+        plaers_sorted_add = []
+        players_instance = []
+        get_valid_match = set()
+        list_of_others_tours = []
+        for match in list_of_finished_matchs:
+            for player in match:
+                players.append(player)
+        sorted_score_players = copy.copy(players)
+        for player in sorted_score_players:
+            plaers_sorted_add.append(player[0])
+        sorted_score_players.clear()
+        for player_id in plaers_sorted_add:
+            player = self.player.data_players.get(doc_id=player_id)
+            players_instance.append(self.player.unserialized_player(player))
 
-        players = self.sort_players_by_score()
+        # Sort players by score, if score are equals, sort by rank.
+        players_instance.sort(key=attrgetter("tournament_score", 'rank'), reverse=True)
+        for player_1 in players_instance:
+            if player_1 in sorted_score_players:
+                continue
+            else:
+                try:
+                    player_2 = players_instance[players_instance.index(player_1) + 1]
+                except Exception:
+                    break
+            get_valid_match.add(player_1.player_id)
+            get_valid_match.add(player_2.player_id)
 
-        players_array = array(players)
-        players_index_pairs = [index for index in range(len(players)) if index % 2 == 0]
-        players_index_impairs = [index for index in range(len(players)) if index % 2 != 0]
-        list_of_others_tours = zip(players_array[players_index_pairs], players_array[players_index_impairs])
-        list_of_others_tours = list(list_of_others_tours)
+            while get_valid_match in self.MATCH_IN_TOURNAMENT:  # compare match_to_try with matchs already played
+                print(f"Attention (!)  Match dejà joué : {player_1.player_id} CONTRE {player_2.player_id}")
+                time.sleep(1)
+                get_valid_match.remove(player_2.player_id)
+                try:
+                    player_2 = players_instance[players_instance.index(player_2) + 1]
+                except Exception:
+                    break
+                get_valid_match.add(player_2)
+                continue
+            else:
+                print(f"Ajout du match {player_1.player_id} CONTRE {player_2.player_id}")
+                list_of_others_tours.append((player_1, player_2))
+                sorted_score_players.append(player_1.player_id)
+                sorted_score_players.append(player_2.player_id)
+                players_instance.pop(players_instance.index(player_2))
+                self.MATCH_IN_TOURNAMENT.append({player_1.player_id, player_2.player_id})
+                get_valid_match.clear()
+                time.sleep(1)
 
         return list_of_others_tours
