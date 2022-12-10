@@ -1,15 +1,13 @@
 import os
 from models.players import Player
-from models.matchs import Match
-from  models.tours import Tour
-from numpy import array
+from models.tours import Tour
 from tinydb import TinyDB
 import copy
 from operator import attrgetter
 import time
 
-#data_path = f'{os.getcwd()}\\data\\'
-data_path="C:\\Users\\Itec Global Services\\PycharmProjects\\Projet_OC04\\data\\"
+
+data_path = f'{os.getcwd()}\\data\\'
 
 
 class Tournament:
@@ -119,7 +117,6 @@ class Tournament:
         self.player = Player()
         self.tour = Tour()
         players = []
-        players_sorted_by_score = []
         plaers_sorted_add = []
         players_instance = []
         get_valid_match = set()

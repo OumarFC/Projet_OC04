@@ -27,4 +27,3 @@ class Match:
                                (self.players[1].player_id, self.players[1].tournament_score)]
 
         Match.list_match_finished.append(self.duel_match)
-

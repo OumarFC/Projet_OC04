@@ -53,7 +53,7 @@ class TournamentController:
             )
             tournament.save_tournament_db()
 
-        #self.menu_control()
+        self.menu_control()
 
     def add_players_id_to_tournament(self):
 
