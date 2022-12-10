@@ -146,7 +146,7 @@ class Tournament:
             get_valid_match.add(player_2.player_id)
 
             while get_valid_match in self.MATCH_IN_TOURNAMENT:  # compare match_to_try with matchs already played
-                print(f"Attention (!)  Match dejà joué : {player_1.player_id} CONTRE {player_2.player_id}")
+                print(f"Attention (!) Match dejà joué - joueur {player_1.player_id} CONTRE joueur {player_2.player_id}")
                 time.sleep(1)
                 get_valid_match.remove(player_2.player_id)
                 try:
@@ -156,7 +156,7 @@ class Tournament:
                 get_valid_match.add(player_2)
                 continue
             else:
-                print(f"Ajout du match {player_1.player_id} CONTRE {player_2.player_id}")
+                print(f"Ajout du match - joueur:{player_1.player_id} CONTRE joueur:{player_2.player_id}")
                 list_of_others_tours.append((player_1, player_2))
                 sorted_score_players.append(player_1.player_id)
                 sorted_score_players.append(player_2.player_id)

@@ -189,7 +189,7 @@ class TournamentController:
             print(" ------ Mise à jour du score des joueurs --- ")
             self.tour.update_score(others_list_tour)
             self.tour.list_match_finished = matchs.Match.list_match_finished
-            print(Tournament.MATCH_IN_TOURNAMENT)
+            #print(Tournament.MATCH_IN_TOURNAMENT)
             self.tour.end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             tours_table.insert(self.tour.serialize_tour())
 
